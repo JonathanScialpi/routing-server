@@ -8,7 +8,7 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use("/containers", containerRoute);
+app.use("/events", containerRoute);
 
 const port = 3001;
 app.listen(port, () => {
