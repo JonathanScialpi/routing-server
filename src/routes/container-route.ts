@@ -22,19 +22,23 @@ router.post('/apmt-events', (req, res) => {
 });
 
 router.post('/apmt-tl-events', (req, res) => {
+    
     res.status(200).send("Event received successfully!");
-
     req.body.forEach(event => {
-      service.postDocument({
-        db: 'apmt-tl-events',
-        document: event
-      });
-    });    
+      if(event.location.unlocode === "USLAX"){
+        service.postDocument({
+          db: 'apmt-tl-events',
+          document: event
+        });
+        // after insert to DB we can post to the APMT Store
+      }
+    }); 
+ 
+       
 });
 
-
-// router.get('/test', (req, res) => {
-//     res.status(200).send("hello from Events Route!");
-// });
+router.get('/test', (req, res) => {
+    res.status(200).send("hello from Events Route!");
+});
 
 export default router;
